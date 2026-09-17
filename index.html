@@ -325,13 +325,13 @@ hr{border:none;border-top:1px solid rgba(30,48,72,.8);margin:14px 0}
     
     <div class="f-group">
       <label>Username</label>
-      <input type="text" id="loginUser" placeholder="Email address" onkeydown="if(event.key==='Enter')doLogin()">
+      <input type="text" id="loginUser" placeholder="Email address" onkeydown="if(event.key==='Enter'&&typeof doLogin==='function')doLogin()">
     </div>
     <div class="f-group">
       <label>Password</label>
-      <input type="password" id="loginPass" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
+      <input type="password" id="loginPass" placeholder="Enter password" onkeydown="if(event.key==='Enter'&&typeof doLogin==='function')doLogin()">
     </div>
-    <button id="loginBtn" class="login-btn" onclick="doLogin()">🔐 Sign In</button>
+    <button id="loginBtn" class="login-btn" onclick="if(typeof doLogin==='function'){doLogin();}else{alert('Tool load ho raha hai, ek second ruk kar dobara try karein.');}">🔐 Sign In</button>
     <div class="login-err" id="loginErr"></div>
     <div style="margin-top:12px;font-size:10px;color:var(--t3)">🔑 Password bhool gaye? Admin se request karein.</div>
     <div class="login-footer">🔒 Secured with Firebase · Data encrypted in transit</div>
@@ -14994,8 +14994,9 @@ function applyTheme(themeId) {
   if(savedBg) applyBgPattern(savedBg);
 })();
 
-// Expose functions to global scope (obfuscator IIFE protection)
+// Expose functions to global scope
 try{window.doLogin=doLogin;}catch(e){}
+try{window.doLogout=doLogout;}catch(e){}
 try{window.goPage=goPage;}catch(e){}
 try{window.switchPSMode=switchPSMode;}catch(e){}
 try{window.runSettlement=runSettlement;}catch(e){}
